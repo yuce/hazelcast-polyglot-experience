@@ -134,10 +134,11 @@ function makeConfig() {
         await main(client);
    } catch (e) {
        console.error("Error running main", e);
+   } finally {
         try {
             if (client) await client.shutdown();
         } catch (e) {
             // pass
         }
-   }
+    }
 })();
