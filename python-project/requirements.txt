@@ -1,0 +1,2 @@
+avro==1.10.1
+hazelcast-python-client==4.0
