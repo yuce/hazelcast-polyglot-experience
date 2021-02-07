@@ -33,9 +33,9 @@ public class Main {
             Object pythonBool = polyglotMap.get("python-bool");
             System.out.printf("pythonBool: %s%n", pythonBool);
 
-            Object pythonArray = polyglotMap.get("python-array");
-            System.out.printf("pythonArray: %s%n", pythonArray);
-            System.out.printf("pythonArray type: %s%n", pythonArray.getClass().toString());
+            Object pythonList = polyglotMap.get("python-list");
+            System.out.printf("pythonList: %s%n", pythonList);
+            System.out.printf("pythonList type: %s%n", pythonList.getClass().toString());
 
             Object pythonString = polyglotMap.get("python-string");
             System.out.printf("pythonString: %s%n", pythonString);

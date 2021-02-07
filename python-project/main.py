@@ -118,7 +118,7 @@ def main():
     polyglot_map.put("python-integer", 1)
     polyglot_map.put("python-float", 3.14)
     polyglot_map.put("python-bool", True)
-    polyglot_map.put("python-array", [1, 2, 3])
+    polyglot_map.put("python-list", [1, 2, 3])
     polyglot_map.put("python-string", "Hazelcast Rocks!")
     polyglot_map.put("python-identified", PersonIdentified(Person("Ford Prefect", 42)))
     polyglot_map.put("python-portable", PersonPortable(Person("Jane Doe", 25)))

@@ -93,8 +93,8 @@ async function main(client) {
     const pythonBool = await polyglotMap.get("python-bool");
     console.log(`pythonBool: ${pythonBool}`);
 
-    // const pythonArray = await polyglotMap.get("python-array");
-    // console.log(`pythonArray: ${pythonArray}`);
+    const pythonList = await polyglotMap.get("python-list");
+    console.log(`pythonList: ${pythonList}`);
 
     const pythonString = await polyglotMap.get("python-string");
     console.log(`pythonString: ${pythonString}`);
