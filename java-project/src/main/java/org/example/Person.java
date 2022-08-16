@@ -1,7 +1,7 @@
 package org.example;
 
 public class Person {
-    public static final int CLASS_ID = 1;
+    public static final int CLASS_ID = 1990845280;
 
     private String name;
     private int age;

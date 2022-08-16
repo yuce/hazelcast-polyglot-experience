@@ -1,4 +1,5 @@
 #! /usr/bin/env python3
+import time
 from io import BytesIO
 
 import hazelcast
@@ -9,7 +10,7 @@ import avro.io
 
 
 class Person:
-    CLASS_ID = 1
+    CLASS_ID = 1990845280
 
     def __init__(self, name, age):
         self.name = name
@@ -75,10 +76,9 @@ class PersonAvroSerializer(StreamSerializer):
 
     @classmethod
     def get_type_id(cls):
-        return 1
+        return 1990845280
 
-    def read(self, input):
-        # type: (hazelcast.serialization.api.ObjectDataInput) -> Person
+    def read(self, input: hazelcast.serialization.api.ObjectDataInput) -> Person:
         bio = BytesIO(input.read_byte_array())
         decoder = avro.io.BinaryDecoder(bio)
         reader = avro.io.DatumReader(self.SCHEMA, self.SCHEMA)
@@ -93,6 +93,11 @@ class PersonAvroSerializer(StreamSerializer):
 
     def destroy(self):
         pass
+
+
+class MyClass:
+    def __init__(self, value):
+        self.value = value
 
 
 def main():
@@ -112,8 +117,12 @@ def main():
     hz = HazelcastClient(
         data_serializable_factories=data_serializable_factories,
         portable_factories=portable_factories,
-        custom_serializers=custom_serializers
+        custom_serializers=custom_serializers,
+        statistics_enabled=True,
     )
+
+    time.sleep(1000)
+
     polyglot_map = hz.get_map("polyglot").blocking()
     polyglot_map.put("python-integer", 1)
     polyglot_map.put("python-float", 3.14)
@@ -123,6 +132,11 @@ def main():
     polyglot_map.put("python-identified", PersonIdentified(Person("Ford Prefect", 42)))
     polyglot_map.put("python-portable", PersonPortable(Person("Jane Doe", 25)))
     polyglot_map.put("python-avro", Person("Marvin Minsky", 65))
+    polyglot_map.put("python-temp", MyClass(20))
+
+    polyglot2 = hz.get_map("polyglot2")
+    v = polyglot2.get(0)
+    assert v == "foo"
 
     java_array = polyglot_map.get("java-array")
     print(f"javaArray: {java_array}")
